@@ -3,6 +3,7 @@ class NegociacaoController {
     constructor() {
 
         let $ = document.querySelector.bind(document);
+        
         this._inputData = $('#data');
         this._inputQuantidade = $('#quantidade');
         this._inputValor = $('#valor');
@@ -37,9 +38,38 @@ class NegociacaoController {
         this._limpaFormulario();
     }
 
+    importaNegociacoes() {
+
+        let xhr = new XMLHttpRequest();
+
+        xhr.open('GET', 'negociacoes/semana');
+
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState == 4) {
+                // state == 4 -> significa requisição
+                // concluida e resposta pronta
+
+                if (xhr.status == 200) {
+                    // status == 200 -> significa que a
+                    // requisição ocorreu sem problemas.
+
+                    JSON.parse(xhr.responseText)
+                        .map(objeto => new Negociacao(new Date(objeto.data), objeto.quantidade, objeto.valor))
+                        .forEach(negociacao => this._listaNegociacoes.adiciona(negociacao))
+                    this._mensagem.texto = 'Negociações importadas com sucesso.';
+                } else {
+                    console.log(xhr.responseText);
+                    this._mensagem.texto = 'Não foi possível obter as negociações.';
+                }
+            }
+        };
+
+        xhr.send();
+    }
+
     apaga() {
         this._listaNegociacoes.esvazia();
-        this._mensagem.texto = 'Negociações apagadas com sucesso!'
+        this._mensagem.texto = 'Negociações apagadas com sucesso!';
     }
 
     _criaNegociacao() {

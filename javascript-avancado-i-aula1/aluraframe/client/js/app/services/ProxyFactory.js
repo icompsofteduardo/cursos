@@ -12,7 +12,6 @@ class ProxyFactory {
                 if (props.includes(prop) && ProxyFactory._isFunction(target[prop])) {
 
                     return function () {
-                        console.log(`método '${prop}' interceptado`);
                         Reflect.apply(target[prop], target, arguments);
                         acao(target);
                     }
