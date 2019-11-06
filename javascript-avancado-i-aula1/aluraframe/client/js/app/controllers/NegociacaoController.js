@@ -7,9 +7,13 @@ class NegociacaoController {
         this._inputQuantidade = $('#quantidade');
         this._inputValor = $('#valor');
 
-        this._listaNegociacoes = new ListaNegociacoes();
+        // A arrow function tem escopo léxico, o contexto dela não muda como uma função comum,
+        // por isso o contexto(this) dela é NegociaçãoController e não mais ListaNegociações.
+        //this._listaNegociacoes = new ListaNegociacoes(model => this._negociacoesView.update(model));
 
         this._negociacoesView = new NegociacoesView($('#negociacoesView'));
+
+        // Mostra a lista na tela.
         this._negociacoesView.update(this._listaNegociacoes);
 
         this._mensagem = new Mensagem();
@@ -21,11 +25,17 @@ class NegociacaoController {
 
         event.preventDefault();
         this._listaNegociacoes.adiciona(this._criaNegociacao());
-        this._negociacoesView.update(this._listaNegociacoes);
 
         this._mensagem.texto = 'Negociacao adicionada com sucesso';
         this._mensagemView.update(this._mensagem);
         this._limpaFormulario();
+    }
+
+    apaga() {
+        this._listaNegociacoes.esvazia();
+
+        this._mensagem.texto = 'Negociações apagadas com sucesso!'
+        this._mensagemView.update(this._mensagem);
     }
 
     _criaNegociacao() {
