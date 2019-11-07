@@ -1,37 +1,36 @@
 class ProxyFactory {
-
+    
     static create(objeto, props, acao) {
-
+     
         return new Proxy(objeto, {
-
-            get(target, prop, receiver) {
-
-                // Includes utilizado para ver se o array possui o que foi passado no props,
-                // após o includes é passado o array que deseja percorrer, com um if, o retorno
-                // será true ou false.
-                if (props.includes(prop) && ProxyFactory._isFunction(target[prop])) {
-
-                    return function () {
-                        Reflect.apply(target[prop], target, arguments);
-                        acao(target);
+                
+                get(target, prop, receiver) {
+                    
+                    if(props.includes(prop) && ProxyFactory._ehFuncao(target[prop])) {
+                        
+                        return function() {
+                            
+                            console.log(`interceptando ${prop}`);
+                            let retorno = Reflect.apply(target[prop], target, arguments);
+                            acao(target);
+                            return retorno;
+                        }
                     }
+                    
+                    return Reflect.get(target, prop, receiver);
+                },
+                
+                set(target, prop, value, receiver) {
+                    
+                    let retorno = Reflect.set(target, prop, value, receiver);
+                    if(props.includes(prop)) acao(target);
+                    return retorno;
                 }
-
-                return Reflect.get(target, prop, receiver);
-            },
-
-            set(target, prop, value, receiver) {
-
-                if (props.includes(prop)) {
-                    acao(target);
-                }
-
-                return Reflect.set(target, prop, value, receiver);
-            }
         });
     }
-
-    static _isFunction(func) {
-        return typeof (func) == typeof (Function);
+    
+    static _ehFuncao(func) {
+        
+        return typeof(func) == typeof(Function);
     }
 }

@@ -1,13 +1,14 @@
 class NegociacaoService {
-
+    
     constructor() {
-
+        
         this._http = new HttpService();
     }
-
-    obterNegociacoesSemana() {
-
-        return new Promise((resolve, reject) => {
+    
+    obterNegociacoesDaSemana() {
+       
+       return new Promise((resolve, reject) => {
+        
             this._http
                 .get('negociacoes/semana')
                 .then(negociacoes => {
@@ -17,13 +18,14 @@ class NegociacaoService {
                 .catch(erro => {
                     console.log(erro);
                     reject('Não foi possível obter as negociações da semana');
-                });
-        });
+                });  
+       });        
     }
-
-    obterNegociacoesAnterior() {
-
-        return new Promise((resolve, reject) => {
+    
+    obterNegociacoesDaSemanaAnterior() {
+       
+       return new Promise((resolve, reject) => {
+        
             this._http
                 .get('negociacoes/anterior')
                 .then(negociacoes => {
@@ -33,14 +35,16 @@ class NegociacaoService {
                 .catch(erro => {
                     console.log(erro);
                     reject('Não foi possível obter as negociações da semana anterior');
-                });
-        });
+                });  
+       }); 
+       
+        
     }
-
-    obterNegociacoesRetrasada() {
-
-        return new Promise((resolve, reject) => {
-
+    
+    obterNegociacoesDaSemanaRetrasada() {
+       
+       return new Promise((resolve, reject) => {
+        
             this._http
                 .get('negociacoes/retrasada')
                 .then(negociacoes => {
@@ -50,11 +54,11 @@ class NegociacaoService {
                 .catch(erro => {
                     console.log(erro);
                     reject('Não foi possível obter as negociações da semana retrasada');
-                });
-        });
-    }
-
-
+                });  
+       }); 
+    }    
+    
+    
     obterNegociacoes() {
 
         return new Promise((resolve, reject) => {
@@ -67,12 +71,12 @@ class NegociacaoService {
 
                 let negociacoes = periodos
                     .reduce((dados, periodo) => dados.concat(periodo), [])
-                    .map(dado => new Negociacao(new Date(dado.data), dado.quantidade, dado.valor));
+                    .map(dado => new Negociacao(new Date(dado.data), dado.quantidade, dado.valor ));
 
                 resolve(negociacoes);
 
             }).catch(erro => reject(erro));
         });
-    }
+    }    
 }
 
