@@ -1,0 +1,9 @@
+select 
+	a.nome,
+    c.nome 
+from 
+	aluno a
+join
+	matricula m on m.aluno_id = a.id 
+join
+	curso c on m.curso = c.id;

@@ -1,0 +1,5 @@
+## 
+BUSCAR REGISTROS SEM REPETIÇÃO
+##
+
+select distinct tipo from matricula

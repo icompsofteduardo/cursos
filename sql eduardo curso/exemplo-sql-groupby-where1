@@ -1,0 +1,9 @@
+select c.nome, avg(n.nota) from 
+nota n
+join resposta r on r.id = n.resposta_id
+join exercicio e on e.id = r.exercicio_id
+join secao s on s.id = e.secao_id
+join curso c on c.id = s.curso_id
+join aluno a on a.id = r.aluno_id
+where a.nome like '%Santos%' or a.nome like '%Silva%'
+group by c.nome

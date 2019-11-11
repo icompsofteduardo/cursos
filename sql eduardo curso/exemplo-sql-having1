@@ -1,0 +1,13 @@
+##
+QUERY UTILIZADA PARA PEGAR APENAS OS ALUNOS COM NOTA ABAIXO DE 5, UTILIZANDO O HAVING
+É UTILIZADO APENAS COM O COUNTBY, APÓS A AGREGAÇÃO!
+##
+select a.nome, c.nome, avg(n.nota) from 
+nota n
+join resposta r on r.id = n.resposta_id
+join exercicio e on e.id = r.exercicio_id
+join secao s on s.id = e.secao_id
+join curso c on c.id = s.curso_id
+join aluno a on a.id = r.aluno_id
+group by c.nome, a.nome
+having avg(n.nota) < 5

@@ -1,0 +1,4 @@
+select e.pergunta, count(r.id) from
+exercicio e join resposta r on e.id = r.exercicio_id
+group by e.id
+order by count(r.id) desc;

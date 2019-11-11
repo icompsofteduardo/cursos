@@ -1,0 +1,6 @@
+select
+	a.nome
+from
+	aluno a
+where exists
+(select m.id from matricula m where m.aluno_id = a.id)
