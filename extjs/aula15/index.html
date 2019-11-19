@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../ext/ext-all.js"></script>
+    <link rel="stylesheet" href="../ext/resources/css/ext-all.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="estadosBr"></div>
+</body>
+
+<script>
+    Ext.Loader.setConfig({ enabled: true });
+
+    var estadosBrasileiros = [
+        [1, 'Acre', 'AC'],
+        [2, 'Paraná', 'PR'],
+        [3, 'Santa Catarina', 'SC'],
+        [4, 'Rio Grande do Sul', 'RS'],
+        [5, 'São Paulo', 'SP'],
+    ]
+
+    Ext.define('Estado', {
+        extend: 'Ext.data.Model',
+        fields: ['id', 'nome', 'sigla']
+    })
+
+    Ext.define('EstadoStore', {
+        extend: 'Ext.data.Store',
+        model: 'Estado',
+        data: estadosBrasileiros
+    })
+
+    Ext.onReady(function () {
+        var store = Ext.create('EstadoStore');
+
+        console.log(store);
+
+        var tpl = Ext.create('Ext.XTemplate',
+            '<h1> Alguns estados Brasileiros: </h1>',
+            '<br></br>',
+            '<tpl for=".">',
+            '<p>{data.nome} - {data.sigla}</p>',
+            '</tpl>'
+        );
+        tpl.overwrite('estadosBr', store.data.items);
+    });
+
+</script>
+
+</html>

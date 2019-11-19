@@ -1,20 +1,12 @@
 <?php
 
-require "Utils/Orcamento.php";
-require "Desconto/Desconto.php";
-require "Desconto/Desconto5Itens.php";
-require "Desconto/Desconto500Reais.php";
-require "Desconto/SemDesconto.php";
-require "Utils/Item.php";
-require "Imposto/CalculadoraDeImpostos.php";
-require "Desconto/CalculadoraDeDescontos.php";
-require "Imposto/Imposto.php";
-require "Imposto/ICMS.php";
-require "Imposto/ISS.php";
-require "Imposto/KCV.php";
-require "Imposto/ICCC.php";
-
-$reforma = new Orcamento(1200);
+$reforma = new Orcamento(490);
+echo $reforma->getValor();
+$reforma->aplicaDesconto();
+echo "<br/>";
+echo $reforma->getValor();
+echo "<br/>";
+echo "<br/>";
 
 // Impostos
 
@@ -22,7 +14,7 @@ $calculadora = new CalculadoraDeImpostos();
 
 echo "Impostos";
 echo "<br/>";
-echo $calculadora->calcula($reforma, new ICMS());
+echo $calculadora->calcula($reforma, new ICMS(new KCV()));
 echo "<br/>";
 echo $calculadora->calcula($reforma, new ISS());
 echo "<br/>";

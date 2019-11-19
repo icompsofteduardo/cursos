@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../ext/ext-all.js"></script>
+    <link rel="stylesheet" href="../ext/resources/css/ext-all.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+
+    Ext.define('Funcionario', {
+        extend: 'Ext.data.Model',
+        fields: [
+            { name: 'nome' }, // tipo: auto
+            { name: 'idade', type: 'int' },
+            { name: 'salario', type: 'float' },
+            { name: 'ativo', type: 'boolean' },
+            { name: 'nasc', type: 'date', dateFormat: 'd/m/Y' },
+            { name: 'usuario', type: 'string' },
+            {
+                name: 'email', type: 'string',
+                convert: function (value, record) {
+                    return record.get('usuario') + '@email.com';
+                }
+            }
+        ]
+    });
+
+    Ext.onReady(function () {
+        var funcionario = Ext.create('Funcionario', {
+            nome: 'Eduardo',
+            idade: 20,
+            salario: 1000,
+            ativo: true,
+            nasc: '06/02/1999',
+            usuario: 'e6'
+        });
+
+        console.log(funcionario);
+        console.log(funcionario.get('nome'));
+        console.log('idade', 25);
+
+
+    });
+
+</script>
+
+</html>

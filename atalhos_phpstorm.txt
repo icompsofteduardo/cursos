@@ -1,0 +1,26 @@
+﻿Atalhos
+
+crtl + H = procura full
+
+crtl + shift + R = procurar arquivos
+
+crtl + L = buscar linha 
+
+crtl + shift + F = indentação do fonte
+
+crtl + D = apaga linha
+
+crtl + shift + numero = marca a linha
+_________________________________________________________
+
+DEBUG
+
+F8 -> para o debug
+F7 -> sai da função
+F6 -> passa a linha
+F5 -> entra na função
+_________________________________________________________
+
+Console SQL
+
+Database -> barra de menu no topo -> console (QL)

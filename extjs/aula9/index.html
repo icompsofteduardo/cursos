@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../ext/ext-all.js"></script>
+    <link rel="stylesheet" href="../ext/resources/css/ext-all.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+
+    Ext.define('Usuario', {
+        // Ao criar atributos dentro do config, eles recebem os getters, setters, reset e apply
+        config: {
+            nome: '',
+            senha: ''
+        }
+    });
+
+    Ext.define('Calculadora', {
+        statics: {
+            numero: 0,
+            soma: function (n1, n2) {
+                return n1 + n2;
+            }
+        },
+
+        constructor: function () {
+            this.statics().numero++;
+        }
+    });
+
+    Ext.define('Constantes', {
+
+        singleton: true, 
+        URL_BLOG: 'http://google.com.br',
+        URL_BLOG_EN: 'http://google.com'
+    });
+
+    Ext.onReady(function () {
+
+        /* var usuario = Ext.create('Usuario');
+        usuario.setNome('Eduardo');
+        usuario.setSenha('123456');
+        console.log(usuario.getNome());
+        console.log(usuario.getSenha()); */
+
+        /* console.log(Calculadora.numero);
+        var calc = Ext.create('Calculadora');
+        console.log(Calculadora.numero);
+
+        console.log(Calculadora.soma(1,2)) */
+
+        console.log(Constantes.URL_BLOG);
+    });
+
+</script>
+
+</html>

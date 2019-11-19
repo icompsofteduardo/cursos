@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="../ext/resources/css/ext-all.css">
+    <script src="../ext/ext-all.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="botao01"></div>
+    <div id="botao02"></div>
+    <div id="botao03"></div>
+</body>
+
+<script>
+
+    Ext.define('MyButton', {
+        extend: 'Ext.button.Button',
+
+        initComponent: function () {
+
+            this.text = 'My button'
+
+            this.callParent();
+        }
+    });
+
+    Ext.onReady(function () {
+        Ext.create('MyButton', {
+            renderTo: 'botao01'
+        });
+
+        Ext.create("MyButton", {
+            renderTo: 'botao02'
+        });
+
+        Ext.create("MyButton", {
+            renderTo: 'botao03'
+        });
+    });
+
+</script>
+
+</html>

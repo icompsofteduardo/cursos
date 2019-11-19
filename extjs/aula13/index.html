@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="ext/"></script>
+    <link rel="stylesheet" href="">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+
+    Ext.define('Contato', {
+        extend: 'Ext.data.model',
+
+        fields: [
+            { name: 'id', type: 'int' },
+            { name: 'nome', type: 'string' },
+            { name: 'email', type: 'string' }
+        ],
+
+        proxy: {
+            type: 'rest',
+            url: 'contatos',
+            format: 'json'
+        }
+
+    });
+
+    Ext.onReady(function () {
+
+        var contato = Ext.create('Contato', {
+            nome: 'Eduardo',
+            email: 'edueduardo06@gmail.com'
+        });
+
+        contato.save();
+    });
+
+</script>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="../ext/resources/css/ext-all.css">
+    <script src="../ext/ext-all.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+
+    Ext.onReady(function () {
+
+        Ext.define('Usuario', {
+            nome: '',
+            senha: '',
+
+            constructor: function (options) {
+                Ext.apply(this, options || {});
+                console.log("Construtor foi chamado.")
+            },
+ 
+            login: function () {
+                console.log("Fazendo login...");
+            },
+
+            logout: function () {
+                console.log("Fazendo logout...");
+            }
+        },
+
+            function () {
+                console.log("Callback foi chamado.")
+            }
+        );
+        var usuario = Ext.create('Usuario', {
+
+            nome: 'Eduardo',
+            senha: '1234'
+        });
+        console.log(usuario);
+    });
+
+</script>
+
+</html>

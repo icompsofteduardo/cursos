@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="extjs/ext-dev.js"></script>
+    <link rel="stylesheet" href="extjs/resources/css/ext-all.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+
+    Ext.Loader.setConfig({
+        enabled: true,
+        paths: {
+            'CursoExt4': 'js'
+        }
+    });
+
+    Ext.onReady(function () {
+        Ext.create('CursoExt4.classe.Usuario')
+    });
+</script>
+
+</html>

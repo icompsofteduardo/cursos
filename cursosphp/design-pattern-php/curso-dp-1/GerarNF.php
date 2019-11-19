@@ -2,23 +2,32 @@
 
 date_default_timezone_set("Brazil/East");
 
-require "NF/NotaFiscal.php";
-require "Utils/Item.php";
 
-$itens = array();
+function carregaClasse($nomeClasse)
+{
+    require $nomeClasse.".php";
+}
 
-$itens[] = new Item("Tijolo", 250.00);
-$itens[] = new Item("Cimento 1kg", 250.00);
+spl_autoload_register("carregaClasse");
 
-$imposto = 500.00 * 0.2;
-$notaFiscal = new NotaFiscal(
-    "Icompsoft",
-    "1234",
-    $itens,
-    500.00,
-    $imposto,
-    "Tijolos amarelos",
-    date("Y-a-d h:i:s"));
+$geradorDeNotas = new NotaFiscalBuilder();
+
+$geradorDeNotas->comEmpresa("Icompsoft");
+$geradorDeNotas->comCnpj("1234");
+$geradorDeNotas->addItem(new Item("Tijolo", 250.00));
+$geradorDeNotas->addItem(new Item("Cimento 1kg", 250.00));
+$geradorDeNotas->addItem(new Item("Cimento 1kg", 250.00));
+$geradorDeNotas->addItem(new Item("Cimento 1kg", 250.00));
+$geradorDeNotas->comObservacoes("Tijolos amarelos");
+$geradorDeNotas->naData();
+
+// Ações
+
+$geradorDeNotas->addAcao(new Impressora());
+$geradorDeNotas->addAcao(new NotaFiscalDao());
+$geradorDeNotas->addAcao(new EnviadorDeSMS());
+
+$notaFiscal = $geradorDeNotas->build();
 
 echo "<pre>";
 var_dump($notaFiscal);

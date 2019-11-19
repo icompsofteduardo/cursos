@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../ext/ext-all.js"></script>
+    <link rel="stylesheet" href="../ext/resources/css/ext-all.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+
+    Ext.define('Contato', {
+        extend: 'Ext.data.Model',
+
+        fields: [
+            { name: 'id', type: 'int' },
+            { name: 'nome', type: 'string' },
+            { name: 'email', type: 'string' }
+        ]
+    });
+
+    Ext.define('ContatosStore', {
+        extend: 'Ext.data.Store',
+        model: 'Contato',
+        proxy: {
+            type: 'ajax',
+            url: 'contatos/lista.json',
+            format: 'json'
+        },
+        autoLoad: true
+    })
+
+    Ext.onReady(function () {
+        var store = Ext.create('ContatosStore');
+        store.load();
+        console.log(store);
+        
+    });
+
+</script>
+
+</html>
