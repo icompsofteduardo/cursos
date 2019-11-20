@@ -17,3 +17,5 @@ $conexao = mysqli_connect($servidor,$user,$senha, $db);
  
 //seleciona a base de dados daquela conexão, caso contrário mostra o erro ocorrido
 $select_database = mysqli_select_db($conexao, $db);
+ 
+?>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../ext/ext-all.js"></script>
+    <link rel="stylesheet" href="../ext/resources/css/ext-all.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="contatos"></div>
+</body>
+
+<script>
+
+    Ext.define('Contact', {
+        extend: 'Ext.data.Model',
+
+        fields: [
+            { name: 'id', type: 'int' },
+            { name: 'name', type: 'string' },
+            { name: 'email', type: 'string' }
+        ]
+    });
+
+    Ext.define('ContactStore', {
+        extend: 'Ext.data.Store',
+        model: 'Contact',
+        proxy: {
+            type: 'ajax',
+            url: 'http://localhost/cursos-eduardo/extjs/aula24/php/listContact.php',
+
+            reader: {
+                type: 'json',
+                root: 'contacts'
+            }
+        },
+        autoLoad: true
+    })
+
+    Ext.onReady(function () {
+        var store = Ext.create('ContactStore');
+        store.on('load', function (s) {
+            console.log(s.data);
+
+            var tpl = Ext.create('Ext.XTemplate',
+                '<h1>Contatos</h1>',
+                '<tpl for=".">',
+                '<p>{data.id} - {data.name} - {data.email}</p>',
+                '</tpl>'
+            );
+
+            tpl.overwrite('contacts', s.data.items);
+        });
+    });
+
+</script>
+
+</html>
